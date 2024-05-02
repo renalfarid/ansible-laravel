@@ -1,0 +1,15 @@
+---
+# handlers file for db
+# handlers file for db
+- name: Enable and Start Mysql                       # handlers start dan enable mysql
+  service:
+    name: mysql                                      # service mysql
+    state: started                                   # start mysql
+    enabled: yes                                     # enable mysql
+  listen: "enstart mysql"                            # trigger handler start dan enable
+
+- name: Restart Mysql                                # handlers restart mysql
+  service:               
+    name: mysql                                      # service mysql
+    state: restarted                                 # restart mysql
+  listen: "res mysql"                                # trigger handlers restart

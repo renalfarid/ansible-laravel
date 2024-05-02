@@ -1,0 +1,9 @@
+---
+# tasks file for roles/laravel
+- include_tasks: nginx.yml
+- meta: flush_handlers
+
+- include_tasks: php.yml
+- meta: flush_handlers
+
+- include_tasks: laravel.yml

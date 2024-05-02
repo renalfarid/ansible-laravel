@@ -1,0 +1,11 @@
+---
+- name: Install PHP
+  apt:
+    name: "{{ php_pkg }}"
+    state: present
+  notify: "start fpm"
+
+# - name: test php
+#   template:
+#     src: info.php.j2
+#     dest: /var/www/html/info.php

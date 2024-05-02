@@ -1,0 +1,12 @@
+---
+- name: Setup Database for Project
+  hosts: db
+  become: true
+  roles:
+    - db
+
+- name: Setup Laravel for Project
+  hosts: web
+  become: true
+  roles:
+    - laravel

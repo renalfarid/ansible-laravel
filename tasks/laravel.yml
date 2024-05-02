@@ -1,0 +1,62 @@
+---
+- name: Install composer
+  get_url:
+    url: https://getcomposer.org/installer
+    dest: /tmp/composer.php
+    mode: "0755"
+  
+- name: Install composer
+  shell: php /tmp/composer.php --install-dir=/usr/bin --filename=composer
+  
+- name: delete composer.php
+  file:
+    path: /tmp/composer.php
+    state: absent
+
+- name: check folder laravel
+  stat:
+    path: /var/www/laravel
+  register: laravel_folder
+
+- name: Set ACL to folder /var/www
+  acl:
+    path: /var/www
+    entity: disdik
+    etype: user
+    permissions: rwx
+    state: present
+
+- name: craete laravel
+  composer:
+    command: create-project
+    prefer_dist: true
+    arguments:  laravel/laravel laravel/
+    working_dir: /var/www
+  become_user: ubuntu
+  register: create_laravel_result
+  when: not laravel_folder.stat.exists
+
+- name: install depencencies
+  composer:
+    command: install
+    arguments: --ignore-platform-reqs
+    working_dir: /var/www/laravel
+  become_user: ubuntu
+  when: create_laravel_result.changed
+
+- name: Copy file .env
+  template:
+    src: env.j2
+    dest: /var/www/laravel/.env
+
+- name: generate key and migrate
+  shell: cd /var/www/laravel && php artisan key:gene && php artisan migrate
+
+- name: chmod folder public, storage, and bootsrap/cache
+  file:
+    path: "{{ access_folder }}"
+    state: directory
+    mode: "0777"
+
+- name: change group and ownership
+  shell: chown -R www-data:www-data "{{ access_folder }}"

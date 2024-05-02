@@ -1,0 +1,5 @@
+[web]
+zonasekolah.id ansible_host=103.109.3.101 ansible_user=disdik ansible_ssh_private_key_file=/Users/enalfarid/my-certificate.pem
+
+[db]
+zonasekolah.id ansible_host=103.109.3.101 ansible_user=disdik ansible_ssh_private_key_file=/Users/enalfarid/my-certificate.pem

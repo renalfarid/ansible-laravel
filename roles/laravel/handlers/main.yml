@@ -1,0 +1,23 @@
+---
+# handlers file for laravel
+# handlers file for roles/laravel
+- name: start and enable nginx
+  service:
+    name: nginx
+    state: started
+    enabled: yes
+  listen: "start nginx"
+
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+  listen: "restart nginx"
+
+
+- name: start and enable php-fpm
+  service:
+    name: php8.1-fpm
+    state: started
+    enabled: yes
+  listen: "start fpm"  

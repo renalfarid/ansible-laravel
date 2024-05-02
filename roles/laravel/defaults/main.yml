@@ -1,0 +1,19 @@
+---
+# defaults file for laravel
+php_pkg:
+- php
+- php-mysql
+- php-pdo
+- php-gd
+- php-mbstring
+- php-xml
+- php-fpm
+- php-curl
+
+access_folder:
+- /var/www/laravel/storage
+- /var/www/laravel/public
+- /var/www/laravel/boostrap/cache
+
+http_port: 80
+dir_path: /var/www/laravel/public

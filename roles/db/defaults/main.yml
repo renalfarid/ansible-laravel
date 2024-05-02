@@ -1,0 +1,6 @@
+---
+# defaults file for db
+db_pkg:
+- mysql-server
+- mysql-client
+- python3-pymysql
